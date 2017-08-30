@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录 - {:C('DOMAIN_NAME')}免费空间二级域名</title>
+<script type="text/javascript" src="/Public/jquery.min.js"></script>
+<script>
+$(function(){
+	$("#sendmail").bind("click",function(){
+		var qq = $("#qq").val();
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:"{:U('Index/forgetmail')}",
+			data:{
+				qq:qq
+			},
+			beforeSend: function(){
+				$("#sendmail").attr("disabled",true);
+				$("#sendmail").val("发送中...");
+			},
+			success:function(d,s){
+				alert(d.message);
+			},
+			complete:function(){
+				$("#sendmail").removeAttr("disabled");
+				$("#sendmail").val("发送邮箱验证码");
+			}
+		});
+	});
+});
+</script>
+</head>
+
+<body>
+<h2>忘记密码 - {:C('DOMAIN_NAME')}免费空间二级域名</h2>
+<form method="POST" action="{:U('Index/changepass')}">
+<p>QQ:<input type="text" name="qq" id="qq" value="" placeholder="QQ号码"/></p>
+<p>验证码:<input type="text" name="qqverify" id="qqverify" value="" placeholder="验证码"/> <input type="button" id="sendmail" value="发送邮箱验证码"/></p>
+<p>密码:<input type="password" name="password" value="" placeholder="密码"/></p>
+<p>重复密码:<input type="password" name="repassword" value="" placeholder="重复密码"/></p>
+<p><input type="submit" value="确认"/></p>
+</form>
+</body>
+</html>

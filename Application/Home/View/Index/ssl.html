@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SSL说明 - {:C('DOMAIN_NAME')}免费空间二级域名</title>
+</head>
+
+<body>
+<h2>SSL说明 - {:C('DOMAIN_NAME')}免费空间二级域名</h2>
+<hr/>
+<p style="color:#900;">2017-07-19 最近更新：更新证书申请和验证方式，解决了安卓手机端微信小程序的网络请求服务器无法验证证书导致调用wx.request接口失败的问题。</p>
+<p> </p>
+<p>1、申请的证书域名应和你的域名保持一致，例如你的域名是xxx.{:C('DOMAIN_SITE')}，那么申请证书时填写的域名就该是xxx.{:C('DOMAIN_SITE')}。<font style="color:red;font-weight:bold;">注意：申请证书时,请不要填写私钥密码,否则会无法启动网站。</font></p>
+<p> </p>
+<p>2、申请后需要进行验证，请使用文件验证方式(不要使用DNS验证)，具体方法：在你的空间创建文件/.well-known/pki-validation/fileauth.txt 并在文件内输入官方给到的需要进行验证的验证字符串</p>
+<p><img src="/Public/fileauth.png"/></p>
+<p> </p>
+<p>3、稍等几分钟后，即可看到验证通过，然后下载apache的证书并解压，将两个.crt和.key重命名将前面的数字和下划线去掉，然后上传到服务器空间的/pem/文件夹下，注意：证书文件名称必须保证和你的域名一致！(比如:你的域名是abc.{:C('DOMAIN_SITE')}，那么你的证书文件名就必须是abc.{:C('DOMAIN_SITE')}.key和abc.{:C('DOMAIN_SITE')}.crt以及root_bundle.crt)。然后点击{:C('DOMAIN_NAME')}用户中心的HTTPS开启按钮即可。</p>
+<p><img src="/Public/ssl.png"/></p>
+<p> </p>
+<p><a href="https://cloud.tencent.com/login?s_url=https%3A%2F%2Fconsole.cloud.tencent.com%2Fssl%3Fapply%3D1%26fromSource%3Dssl" target="_blank">点此申请疼讯云免费SSL证书</a></p>
+</body>
+</html>

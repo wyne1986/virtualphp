@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>用户中心 - {:C('DOMAIN_NAME')}免费空间二级域名</title>
+<script type="text/javascript" src="/Public/jquery.min.js"></script>
+<script>
+$(function(){
+	$("#subit").bind("click",function(){
+		var qq = $("#qq").val();
+		var qqverify = $("#qqverify").val();
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var repassword = $("#repassword").val();
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:"{:U('Index/register')}",
+			data:{
+				username:username,
+				password:password,
+				repassword:repassword,
+				qq:qq,
+				qqverify:qqverify
+			},
+			beforeSend: function(){
+				$("#subit").attr("disabled",true);
+				$("#subit").val("提交中...");
+			},
+			success:function(d,s){
+				alert(d.message);
+				if(d.status==1){
+					location.href = "{:U('Index/login')}";
+				}
+			},
+			complete:function(){
+				$("#subit").removeAttr("disabled");
+				$("#subit").val("确认注册");
+			}
+		});
+	});
+	$("#openssl").bind("click",function(){
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:"{:U('Index/openssl')}",
+			beforeSend: function(){
+				$("#openssl").attr("disabled",true);
+				$("#openssl").val("申请中...");
+			},
+			success:function(d,s){
+				alert(d.message);
+				if(d.status==1){
+					location.reload();
+				}
+			},
+			complete:function(){
+				$("#openssl").removeAttr("disabled");
+				$("#openssl").val("开启");
+			}
+		});
+	});
+});
+</script>
+</head>
+
+<body>
+<h2>用户中心 - {:C('DOMAIN_NAME')}免费空间二级域名</h2>
+<hr/>
+<p>用户名 : <php>echo session('username');</php> <a href="{:U('Index/logout')}">退出</a></p>
+<p>二级域名 : <php>echo session('username').'.demaxi.cn'.' / '.session('username').'.zuozishu.com';</php></p>
+<p>HTTPS(仅demaxi.cn) : <eq name="openssl" value="0">未开启 <input type="button" id="openssl" value="开启"/> <a href="{:U('Index/ssl')}" target="_blank">申请免费SSL证书</a><else/>已开启</eq></p>
+<p>服务器环境 : Ubuntu14 + Apache2.2 + PHP5.6 + MariaDB10 + pure-ftpd</p>
+<hr/>
+<h3>数据库 &amp;&amp; FTP</h3>
+<p>连接地址 : <php>echo session('username').'.demaxi.cn';</php> </p>
+<p>用户名 : <php>echo session('username');</php> </p>
+<p>密码 : {$password?$password:'与登录密码相同'} </p>
+<hr/>
+<h3>工具下载</h3>
+<p><a href="http://pan.baidu.com/s/1kV7HirP" target="_blank">FTP客户端 FlashFXP for windows</a></p>
+<p><a href="http://pan.baidu.com/s/1jILUAoA" target="_blank">数据库管理工具Navicat</a></p>
+<hr/>
+<h3>用户展示</h3>
+<volist name="result" id="rs">
+<a href="http://{$rs['username']}.demaxi.cn/" target="_blank">{$rs['username']}</a> &nbsp;&nbsp; 
+</volist>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>用户登录 - {:C('DOMAIN_NAME')}免费虚拟空间</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="/Public/Home/login/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/Public/Home/login/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="/Public/Home/login/templatemo_style.css" rel="stylesheet" type="text/css">	
+	<script type="text/javascript" src="http://www.demaxi.cn/Public/jquery.min.js"></script>
+	<script>
+	$(function(){
+		$("#logit").bind("click",function(){
+			var username = $("#username").val();
+			var password = $("#password").val();
+			$.ajax({
+				type:"POST",
+				dataType:"json",
+				url:"{:U('Index/logit')}",
+				data:{
+					username:username,
+					password:password
+				},
+				beforeSend: function(){
+					$("#logit").attr("disabled",true);
+					$("#logit").val("登录中...");
+				},
+				success:function(d,s){
+					alert(d.message);
+					if(d.status==1){
+						location.href = "{:U('Index/user')}";
+					}
+				},
+				complete:function(){
+					$("#logit").removeAttr("disabled");
+					$("#logit").val("确认登录");
+				}
+			});
+		});
+	});
+	</script>
+</head>
+<body class="templatemo-bg-gray">
+
+	<div class="container">
+		<div class="col-md-12">
+			<h1 class="margin-bottom-15">用户登录 - {:C('DOMAIN_NAME')}免费虚拟空间</h1>
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" onsubmit="javascript:return false;">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		     
+		            	<input type="text" class="form-control" id="username" placeholder="账号名">
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		            	<input type="password" class="form-control" id="password" placeholder="密码">
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		          		<input type="button" id="logit" value="确认登录" class="btn btn-info">
+		          		<a href="{:U('Index/forget')}" target="_blank" class="text-right pull-right">忘记密码?</a>
+		          	</div>
+		          </div>
+		        </div>
+		      </form>
+		      <div class="text-center">
+		      	<a href="{:U('Index/index')}" class="templatemo-create-new">没有账号？ 立即注册<i class="fa fa-arrow-circle-o-right"></i></a>	
+		      </div>
+		</div>
+	</div>
+
+</body></html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>用户注册 - {:C('DOMAIN_NAME')}免费虚拟空间</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="/Public/Home/login/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/Public/Home/login/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="/Public/Home/login/templatemo_style.css" rel="stylesheet" type="text/css">	
+	<script type="text/javascript" src="http://www.demaxi.cn/Public/jquery.min.js"></script>
+	<script>
+	$(function(){
+		$("#sendmail").bind("click",function(){
+			var qq = $("#qq").val();
+			$.ajax({
+				type:"POST",
+				dataType:"json",
+				url:"{:U('Index/sendmail')}",
+				data:{
+					qq:qq
+				},
+				beforeSend: function(){
+					$("#sendmail").attr("disabled",true);
+					$("#sendmail").val("发送中...");
+				},
+				success:function(d,s){
+					alert(d.message);
+				},
+				complete:function(){
+					$("#sendmail").removeAttr("disabled");
+					$("#sendmail").val("发送QQ邮箱验证码");
+				}
+			});
+		});
+		$("#subit").bind("click",function(){
+			var qq = $("#qq").val();
+			var qqverify = $("#qqverify").val();
+			var username = $("#username").val();
+			var password = $("#password").val();
+			var repassword = $("#repassword").val();
+			$.ajax({
+				type:"POST",
+				dataType:"json",
+				url:"{:U('Index/register')}",
+				data:{
+					username:username,
+					password:password,
+					repassword:repassword,
+					qq:qq,
+					qqverify:qqverify
+				},
+				beforeSend: function(){
+					$("#subit").attr("disabled",true);
+					$("#subit").val("提交中...");
+				},
+				success:function(d,s){
+					alert(d.message);
+					if(d.status==1){
+						location.href = "{:U('Index/login')}";
+					}
+				},
+				complete:function(){
+					$("#subit").removeAttr("disabled");
+					$("#subit").val("确认注册");
+				}
+			});
+		});
+	});
+	</script>
+
+</head>
+<body class="templatemo-bg-gray">
+
+	<h1 class="margin-bottom-15">注册用户 - {:C('DOMAIN_NAME')}免费虚拟空间</h1>
+	<div class="container">
+		<div class="col-md-12">			
+			<form class="form-horizontal templatemo-create-account templatemo-container" onsubmit="javascript:return false;">
+				<div class="form-inner">
+					<div class="form-group">
+			          <div class="col-md-6">
+			            <input type="text" class="form-control" id="qq" placeholder="QQ号码">		            		            		            
+			          </div>
+			          <div class="col-md-6">
+			            <input type="button" id="sendmail" value="发送QQ邮箱验证码" class="btn btn-info">
+			          </div>    
+			        </div>
+			        <div class="form-group">
+			          <div class="col-md-6">
+			            <input type="text" class="form-control" id="qqverify" placeholder="QQ邮箱验证码">
+			          </div>              
+			        </div>	
+			        <div class="form-group">
+			          <div class="col-md-12">		          	
+			            <input type="email" class="form-control" id="username" placeholder="账号名">		            		            		            
+			          </div>              
+			        </div>			
+			        <div class="form-group">
+			          <div class="col-md-6">
+			            <input type="text" class="form-control" id="password" placeholder="密码">
+			          </div>
+			          <div class="col-md-6">
+			            <input type="text" class="form-control" id="repassword" placeholder="确认密码">
+			          </div>            
+			        </div>
+			        <div class="form-group">
+			          <div class="col-md-12">
+			            <input type="button" id="subit" value="确认注册" class="btn btn-info pull-right">
+			            <input type="button" value="已有账号? 立即登录" class="btn btn-warning" onclick="javascript:location.href='{:U('Index/login')}'">
+			          </div>
+			        </div>	
+				</div>				    	
+		      </form>		      
+		</div>
+	</div>
+
+</body></html>
