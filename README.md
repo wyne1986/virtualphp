@@ -18,3 +18,5 @@ sudo visudo
 * edit /Application/Conf/config.php for your domain and IP and emailServer
 
 use your host create a virtual space domain
+
+Demo domain: <a title="demaxi virtualhost" href="http://www.demaxi.cn/" target="_blank">www.demaxi.cn</a>
