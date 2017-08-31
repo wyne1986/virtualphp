@@ -6,8 +6,9 @@
 * PHP Framework : ThinkPHP 3.2.3
 * pure-ftpd
 
-* web root : /home/www
-* Apache site root : /etc/apache2/sites-enabled/
+* this project web root : /home/www/html
+* Apache document root : /home/www
+* Apache site config root : /etc/apache2/sites-enabled/
 
 * change system sudoers
 ```console
