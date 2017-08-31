@@ -1,5 +1,5 @@
 # virtualphp
-## system envioment
+## system enviroment
 * Linux-Ubuntu16.04
 * PHP5.6 (ext:xml,mbstring,gd,mysql,mysqli,pdo)
 * Apache2.4 / nginx
