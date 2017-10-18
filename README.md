@@ -21,4 +21,4 @@ sudo visudo
 
 use your host create a virtual space domain
 
-Demo domain: <a title="demaxi virtualhost" href="http://www.demaxi.cn/" target="_blank">www.demaxi.cn</a>
+Demo domain: <a title="demaxi virtualhost" href="http://v.zuozishu.com/" target="_blank">v.zuozishu.com</a>
